@@ -1,38 +1,38 @@
 // Fix pointer - make it something better
 // style scale axes
-// 
 // http://alignedleft.com/tutorials/d3/axes
-// style popups
-// make sgv responsive
+// style popups better
 // toggle linear/logarithmic scale
-// 
 
 $(document).ready(function(){
 
 mapboxgl.accessToken = "pk.eyJ1IjoicGV0dHljcmltZSIsImEiOiJjaXZpbnU0bW0wMWV3MnVsdmZjY2cwY2h1In0.32CdrS6KcH8nGgBvPUJlOg";
 
 
-
+// variable assignation
 
 var margin = {top: 20, right: 20, bottom: 70, left: 40},
-    width = ($("#chart").width()) * 0.95;
+    width = ($("#chart").width()) * 0.9;
     height = ($("#chart").height()) * 0.8;
 
+var now = Date.now()
+
+
+var colours = {orange: "#FAA61A",
+				green: "#39B449",
+				red: "#EB2526"}
+
+function formatDate(d){
+	return d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " +
+d.getHours() + ":" + d.getMinutes();
+}
 
 
 
-var barChart = d3.select("#chart")
-    .append("svg")
-        .attr("width", width + margin.left+ margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .attr("id", "chartsvg")
-        .style("padding-top", "40px")
-        .style("padding-left", "20px")
-        .style("padding-right", "40px;");
 
+// function doStuff(){
 
-
-var barHeightVariable = 2
+// create map and bar chart
 
 var map = new mapboxgl.Map({
     container: 'map',
@@ -46,18 +46,17 @@ var popup = new mapboxgl.Popup({
     closeOnClick: false
 });
 
-var now = Date.now()
 
+var barChart = d3.select("#chart")
+    .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("id", "chartsvg")
+        .style("padding-top", "40px")
+        .style("padding-left", "40px")
+        .style("padding-right", "60px");
 
-var colours = {orange: "#FAA61A",
-				green: "#39B449",
-				red: "#EB2526"}
-	
-
-
-// function doStuff(){
-
-d3.json("http://localhost:5000/api/geonet", function(data){
+d3.json("https://fj80rqsif9.execute-api.ap-southeast-2.amazonaws.com/prod?MMI=2", function(data){
 	data.features = data.features.map(function(d){
 		d.properties.date = new Date(d.properties.time)
 		d.properties.time = d.properties.date.getTime()
@@ -82,7 +81,7 @@ var xScale = d3.scaleTime()
 
 
 var yScale = d3.scaleLinear()
-			.domain([0, d3.max(data.features, function(d){ console.log(d.properties.depth)
+			.domain([0, d3.max(data.features, function(d){
 			 return d.properties.depth })])
 			.range([0, height])
 
@@ -111,7 +110,7 @@ var opacityScale = d3.scaleLinear()
 
 
 
-
+// add map layers
 
 map.addSource('earthquakes', {
 	    'type': 'geojson',
@@ -170,8 +169,8 @@ map.on('mousemove', function (e) {
     d3.select("#id" + features[0].properties.publicID)
     .attr("opacity", "1")
     .attr("fill", colours.red);
-	} else {
 
+	} else {
 		map.setFilter("circlelayer-hover", ["==", "publicID", ""])
 
 		barChart.selectAll("circle")
@@ -194,7 +193,8 @@ barChart.selectAll("rect")
 		return xScale(d.properties.time);
 	})
 	.attr("y", 0)
-	.attr("width", 1)
+	.attr("width", 0.5)
+	.attr("class", "rectogram")
 	.attr("height", function(d){
 		return yScale(d.properties.depth)
 	})
@@ -237,21 +237,35 @@ barChart.selectAll("rect")
 
 
 
-   barChart.append("g")
+   var axx = barChart.append("g")
     .attr("class", "axis")
    	.call(xAxis);
 
 
-   	barChart.append("g")
+ 	var axy = barChart.append("g")
     .attr("class", "axis")
-    .attr("transform", "translate(" + 5 + ",0)")
+    .style("z-axis", "50")
     .call(yAxis);
 
 
+    axy.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", "20")
+    .attr("x",function(){
+    	return -(height*0.75)
+    })
+    .attr("transform", "rotate(-90)")
+    .text("Depth in km")
+    .style("font-size", "15px");
 
-   	function popItUp(d){
+
+
+
+   	function popItUp(d){	
+
    	popup.setLngLat(d.geometry.coordinates)
-    .setHTML('<h1>' + d.properties.locality + '</h1><P>' + d.properties.date + '</P><h2> MAGNITUDE: ' + d.properties.magnitude + '</h2>')
+    .setHTML('<h1>' + d.properties.locality + '</h1><P>' + formatDate(d.properties.date) + '</P><h2> Magnitude: ' + Math.round(d.properties.magnitude*100)/100 + '</h2>')
     .addTo(map);
   	 }
 

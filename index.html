@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Title</title>
+    <title>Quakes ahoy</title>
 
 
 
@@ -12,7 +12,6 @@
  	<script type="text/javascript" src="d3/d3.js"></script>
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  	<script type="text/javascript" src="jquery.jsonp.js"></script>
- 	<script type="text/javascript" src="moment.js"></script>
  	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.css' rel='stylesheet' />
 
@@ -24,6 +23,9 @@
 <script src="https://d3js.org/d3-time.v1.min.js"></script>
 <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
 <script src="https://d3js.org/d3-scale.v1.min.js"></script>
+<link href="//cdn.rawgit.com/noelboss/featherlight/1.6.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.6.1/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
 
 
   <script src="script.js"></script>
@@ -39,8 +41,13 @@
 
   			<div id="hazelayer"></div>
 
+        <div id="map">
+<!--         <div id="welcome">
+          <p>These bubbles represent the 100 most recent quakes greater than Magnitude 2 reported by GeoNet via their API service. The size and colour of the bubbles on the chart indicate the quake's magnitude, and their position on the y axis indicates their depth below sea level. The x axis records the time of the quake. Hover over a bubble to see the quake's location indicated on the map, or hover over a quake spot on the map to see it highlight on the chart.</p>
+        </div>
+ -->
   
-  			<div id="map"></div>
+  			</div>
 
 
 
