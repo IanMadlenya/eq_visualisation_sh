@@ -79,15 +79,38 @@ var yScale = d3.scaleLinear()
 .range([0, height])
 
 
-
 var xAxis = d3.svg.axis()
 .scale(xScale)
 .orient("top")
 .ticks(6);
 
+
 var yAxis = d3.svg.axis()
 .scale(yScale)
 .orient("left");
+
+
+var axx = barChart.append("g")
+.attr("class", "axis")
+.call(xAxis);
+
+
+var axy = barChart.append("g")
+.attr("class", "axis")
+.style("z-axis", "50")
+.call(yAxis);
+
+
+axy.append("text")
+.attr("class", "y label")
+.attr("text-anchor", "end")
+.attr("y", "20")
+.attr("x",function(){
+	return -(height*0.75)
+})
+.attr("transform", "rotate(-90)")
+.text("Depth in km")
+.style("font-size", "15px");
 
 
 var colourscale = d3.scaleLinear()
@@ -231,30 +254,7 @@ barChart.selectAll("circle")
 
 
 
-var axx = barChart.append("g")
-.attr("class", "axis")
-.call(xAxis);
-
-
-var axy = barChart.append("g")
-.attr("class", "axis")
-.style("z-axis", "50")
-.call(yAxis);
-
-
-axy.append("text")
-.attr("class", "y label")
-.attr("text-anchor", "end")
-.attr("y", "20")
-.attr("x",function(){
-	return -(height*0.75)
-})
-.attr("transform", "rotate(-90)")
-.text("Depth in km")
-.style("font-size", "15px");
-
-
-
+// popup on map
 
 function popItUp(d){	
 
