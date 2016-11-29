@@ -14,7 +14,26 @@
   	}
 
 
-	  	#hazelayer { 
+    .footer {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #efefef;
+      padding: 3px;
+      text-align: center;
+      height: 4%;
+      z-index: 500;
+    }
+
+    #logo{
+      height: 100%;
+      float: left;
+      padding-bottom: none;
+      padding-top: none;
+    }
+
+	  #hazelayer { 
 		position: absolute;
 		top:0; 
 		bottom:0; 

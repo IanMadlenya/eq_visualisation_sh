@@ -254,6 +254,8 @@ barChart.selectAll("circle")
 
 
 
+
+
 // popup on map
 
 function popItUp(d){	
