@@ -42,12 +42,12 @@ var popup = new mapboxgl.Popup({
 
 var barChart = d3.select("#chart")
 .append("svg")
-.attr("width", width)
+.attr("width", (width * 0.7))
 .attr("height", height)
 .attr("id", "chartsvg")
 .style("padding-top", "40px")
-.style("padding-left", "40px")
-.style("padding-right", "60px");
+.style("padding-left", "40px");
+// .style("padding-right", "60px");
 
 d3.json("https://fj80rqsif9.execute-api.ap-southeast-2.amazonaws.com/prod?MMI=2", function(data){
 	data.features = data.features.map(function(d){
@@ -261,7 +261,9 @@ barChart.selectAll("circle")
 function popItUp(d){	
 
 	popup.setLngLat(d.geometry.coordinates)
-	.setHTML('<h1>' + d.properties.locality + '</h1><P>' + formatDate(d.properties.date) + '</P><h2> Magnitude: ' + Math.round(d.properties.magnitude*100)/100 + '</h2>')
+	.setHTML('<h1>' + d.properties.locality + '</h1><P>' + 
+		formatDate(d.properties.date) + '</P><h2> Magnitude: ' + 
+		Math.round(d.properties.magnitude*100)/100 + '</h2>')
 	.addTo(map);
 }
 
