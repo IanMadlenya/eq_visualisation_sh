@@ -1,68 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
 
-    <title>Quakes ahoy</title>
-
-
+      <title>Quakes ahoy</title>
 
 
-<link rel="stylesheet" type="text/css" href="style.css">
- 	<script type="text/javascript" src="d3/d3.js"></script>
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 	<script type="text/javascript" src="jquery.jsonp.js"></script>
- 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.js'></script>
+
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+   	<script type="text/javascript" src="d3/d3.js"></script>
+<!--    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+    <script src="//code.jquery.com/jquery-latest.js"></script>
+    <script src="//cdn.rawgit.com/noelboss/featherlight/1.6.1/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+   	<script type="text/javascript" src="jquery.jsonp.js"></script>
+   	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.27.0/mapbox-gl.css' rel='stylesheet' />
-
-<script src="https://d3js.org/d3-array.v1.min.js"></script>
-<script src="https://d3js.org/d3-collection.v1.min.js"></script>
-<script src="https://d3js.org/d3-color.v1.min.js"></script>
-<script src="https://d3js.org/d3-format.v1.min.js"></script>
-<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-<script src="https://d3js.org/d3-time.v1.min.js"></script>
-<script src="https://d3js.org/d3-time-format.v2.min.js"></script>
-<script src="https://d3js.org/d3-scale.v1.min.js"></script>
-<link href="//cdn.rawgit.com/noelboss/featherlight/1.6.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-<script src="//cdn.rawgit.com/noelboss/featherlight/1.6.1/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
-
-
-  <script src="script.js"></script>
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.6.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-format.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v1.min.js"></script>
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.6.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <script src="//cdn.rawgit.com/noelboss/featherlight/1.6.1/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
 
 
-  </head>
-
-  <body>
+    <script src="script.js"></script>
 
 
-  			<div id="chart">  
-        </div>
+
+    </head>
+
+    <body>
 
 
-                   
+    			<div id="chart">  
+          </div>
 
 
-  			<div id="hazelayer"></div>
+                     
 
-        <div id="map">
-<!--         <div id="welcome">
-          <p>These bubbles represent the 100 most recent quakes greater than Magnitude 2 reported by GeoNet via their API service. The size and colour of the bubbles on the chart indicate the quake's magnitude, and their position on the y axis indicates their depth below sea level. The x axis records the time of the quake. Hover over a bubble to see the quake's location indicated on the map, or hover over a quake spot on the map to see it highlight on the chart.</p>
-        </div>
- -->
+
+    			<div id="hazelayer"></div>
+
+          <div id="map">
+
   
-  			</div>
+    
+    			</div>
 
 
-        <div class="footer">
-         <a href="http://optimalbi.com/blog/2016/11/25/oh-these-shaky-isles/"> 
-          <img src="logo.png" id="logo" > 
-         </a>
-        </div>
+          <div class="footer">
+           <a href="http://optimalbi.com/blog/2016/11/25/oh-these-shaky-isles/"> 
+            <img src="logo.png" id="logo" > 
+                       </a>
+
+            <a href="#" data-featherlight="#welcome"> 
+            <img src="information.png" id="info" > 
+
+          </div>
 
 
-	
-</body>
+  	
+  </body>
 
-</html>
+          <div id="welcome">
+            <h1>Welcome to the OptimalBI earthquake data visualisation app. The visualisation represents the most recent 100 earthquakes above Magnitude 2 detected and reported by Geonet.</h1>
+
+            <p>Each of the bubbles on the chart represents an earthquake; you can hover your mouse over a bubble to see its location on the map, or touch it if you’re looking at this on your phone. You can also hover over one of the quakes represented by a circle on the map to see which bubble on the chart it corresponds to.
+            <br>
+            <br>
+            The bubbles are plotted on the chart on a timescale running left to right; the bubble closest to the right is the most recent earthquake. The distance of the bubble from the top of the chart indicates the depth of the earthquake. The size and colour of the bubbles represent their magnitude; the larger and brighter the bubble, the stronger the earthquake.
+            <br>
+            <br>
+            Got questions or comments? Head over to our blog to leave a note for us!
+            </p>
+          </div>
+
+  </html>
