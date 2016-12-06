@@ -49,7 +49,7 @@ var barChart = d3.select("#chart")
 .style("padding-left", "40px");
 // .style("padding-right", "60px");
 
-d3.json("https://fj80rqsif9.execute-api.ap-southeast-2.amazonaws.com/prod?MMI=2", function(data){
+d3.json("https://4hzb2qajkl.execute-api.ap-southeast-2.amazonaws.com/prod?MMI=3", function(data){
 	data.features = data.features.map(function(d){
 		d.properties.date = new Date(d.properties.time)
 		d.properties.time = d.properties.date.getTime()
